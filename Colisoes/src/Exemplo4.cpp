@@ -28,9 +28,9 @@ void Exemplo4::update(){
 	switch (pressedButton) {
 		case 1:
 			b1.position = mouse;
-
-			//TODO: Fazer o teste com os outros algoritmos de bounding box implementados
-			colors[0] = AABBOffsetCollisionCheck(&b1, &b2) ? color3 : color2;
+			colors[0] = //Testing all algorithms
+				AABBOffsetCollisionCheck(&b1, &b2) && AABBCollisionCheck(&b1, &b2) && AABBCollisionCheck(&b1, &b2)
+				? color3 : color2;
 			break;
 		case 2:
 			c1.position = mouse;
