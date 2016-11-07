@@ -49,23 +49,23 @@ bool math::circleCollisionCheck(const BoundingCircle *circle, const BoundingCirc
 }
 
 bool math::circleBoxCollisionCheck(const BoundingBox *box, const BoundingCircle *circle) {
-	Point point;
+	Point result;
 
 	if(circle->xy[0] < box->left())
-		point.x = box->left();
+		result.x = box->left();
 	else if(circle->xy[0] > box->right())
-		point.x = box->right();
+		result.x = box->right();
 	else
-		point.x = circle->xy[0];
+		result.x = circle->xy[0];
 
 	if(circle->xy[1] < box->top())
-		point.y = box->top();
+		result.y = box->top();
 	else if(circle->xy[1] > box->bottom())
-		point.y = box->bottom();
+		result.y = box->bottom();
 	else
-		point.y = circle->xy[1];
+		result.y = circle->xy[1];
 
-	return distanceSqr(point, circle->position) < pow(circle->radius, 2);
+	return distanceSqr(result, circle->position) < pow(circle->radius, 2);
 }
 
 bool math::AABBOffsetCollisionCheck(const BoundingBox *box, const BoundingBox *other) {
