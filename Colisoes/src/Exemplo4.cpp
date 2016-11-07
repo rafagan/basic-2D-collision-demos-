@@ -20,8 +20,8 @@ void Exemplo4::setup(){
 	b1.wh[1] = b2.wh[1] = 100;
 	c1.radius = c2.radius = 100;
 
-	b2.xy[0] = c2.x = 600;
-	b2.xy[1] = c2.y = 300;
+	b2.xy[0] = c2.xy[0] = 600;
+	b2.xy[1] = c2.xy[1] = 300;
 
 	pressedButton = 1;
 }
@@ -37,14 +37,14 @@ void Exemplo4::update(){
 			colors[0] = AABBOffsetCollisionCheck(&b1, &b2) ? color3 : color2;
 			break;
 		case 2:
-			c1.x = mouse.x;
-			c1.y = mouse.y;
+			c1.xy[0] = mouse.x;
+			c1.xy[1] = mouse.y;
 
 			colors[0] = circleCollisionCheck(&c1, &c2) ? color3 : color2;
 			break;
 		case 3:
-			c1.x = mouse.x;
-			c1.y = mouse.y;
+			c1.xy[0] = mouse.x;
+			c1.xy[1] = mouse.y;
 
 			colors[0] = circleBoxCollisionCheck(&b2, &c1) ? color3 : color2;
 			break;
@@ -71,13 +71,13 @@ void Exemplo4::draw(){
 		break;
 	case 2:
 		cg::setColor(colors[1]);
-		cg::drawCircle(Vector2D(c2.x, c2.y), c2.radius);
+		cg::drawCircle(Vector2D(c2.xy[0], c2.xy[1]), c2.radius);
 		cg::setColor(colors[0]);
-		cg::drawCircle(Vector2D(c1.x, c1.y), c1.radius);
+		cg::drawCircle(Vector2D(c1.xy[0], c1.xy[1]), c1.radius);
 		break;
 	case 3:
 		cg::setColor(colors[1]);
-		cg::drawCircle(Vector2D(c1.x, c1.y), c1.radius);
+		cg::drawCircle(Vector2D(c1.xy[0], c1.xy[1]), c1.radius);
 		cg::setColor(colors[0]);
 		cg::drawBox(Vector2D(b2.xy[0] + b2.wh[0] / 2, b2.xy[1] + b2.wh[1] / 2), Vector2D(b2.wh[0], b2.wh[1]));
 		break;

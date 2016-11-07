@@ -9,8 +9,8 @@ using namespace math;
 void Exemplo3::setup(){
 	step = 0;
 
-	c.x = 300;
-	c.y = 150;
+	c.xy[0] = 300;
+	c.xy[1] = 150;
 	c.radius = 50;
 
 	position.set(600, 200);
@@ -25,8 +25,8 @@ void Exemplo3::configureNextStep()
 {
 	if (step == 0) {
 		velocity = Vector2D(100, 0);
-		c.x = 150;
-		c.y = 300;
+		c.xy[0] = 150;
+		c.xy[1] = 300;
 		c.radius = 50;
 
 		position.set(500, 300);
@@ -36,12 +36,12 @@ void Exemplo3::configureNextStep()
 		step = 1;
 	}
 	else if (step == 1) {
-		if (c.x > ofGetWidth())
+		if (c.xy[0] > ofGetWidth())
 			step = 2;
 	}
 	else if (step == 2) {
-		c.x = 300;
-		c.y = 200;
+		c.xy[0] = 300;
+		c.xy[1] = 200;
 		c.radius = 50;
 
 		position.set(300, 400);
@@ -53,7 +53,7 @@ void Exemplo3::configureNextStep()
 		step = 3;
 	}
 	else if (step == 3) {
-		if (c.y > ofGetHeight())
+		if (c.xy[1] > ofGetHeight())
 			step = 4;
 	}
 	else if (step == 4) {
@@ -66,8 +66,8 @@ void Exemplo3::update(){
 
 	auto dt = ofGetLastFrameTime();
 
-	c.x += velocity.x * dt;
-	c.y += velocity.y * dt;
+	c.xy[0] += velocity.x * dt;
+	c.xy[1] += velocity.y * dt;
 }
 
 //--------------------------------------------------------------
@@ -83,7 +83,7 @@ void Exemplo3::draw(){
 		cg::setColor(Vector3D(255, 255, 0)) :
 		cg::setColor(Vector3D(0, 255, 255));
 
-	cg::drawCircle(Vector2D(c.x, c.y), c.radius);
+	cg::drawCircle(Vector2D(c.xy[0], c.xy[1]), c.radius);
 }
 
 //--------------------------------------------------------------

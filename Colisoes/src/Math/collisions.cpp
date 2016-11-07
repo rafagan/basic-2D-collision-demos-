@@ -70,8 +70,8 @@ int math::AABBInnerCollisionCheck(const BoundingBox *box, const BoundingBox *oth
 
 int math::circleCollisionCheck(const BoundingCircle *circle, const BoundingCircle *other) {
 	Point distV;
-	distV.x = circle->x - other->x;
-	distV.y = circle->y - other->y;
+	distV.x = circle->xy[0] - other->xy[0];
+	distV.y = circle->xy[1] - other->xy[1];
 
 	auto distSqr = distV.x * distV.x + distV.y * distV.y;
 	auto sumRadius = (circle->radius * circle->radius + 2 * circle->radius * other->radius + other->radius * other->radius);
@@ -87,23 +87,23 @@ int math::circleBoxCollisionCheck(const BoundingBox *box, const BoundingCircle *
 	boxTop = box->xy[1];
 	boxBottom = box->xy[1] + box->wh[1];
 
-	if(circle->x < boxLeft)
+	if(circle->xy[0] < boxLeft)
 		point.x = boxLeft;
-	else if(circle->x > boxRight)
+	else if(circle->xy[0] > boxRight)
 		point.x = boxRight;
 	else
-		point.x = circle->x;
+		point.x = circle->xy[0];
 
-	if(circle->y < boxTop)
+	if(circle->xy[1] < boxTop)
 		point.y = boxTop;
-	else if(circle->y > boxBottom)
+	else if(circle->xy[1] > boxBottom)
 		point.y = boxBottom;
 	else
-		point.y = circle->y;
+		point.y = circle->xy[1];
 
 	Point distV;
-	distV.x = point.x - circle->x;
-	distV.y = point.y - circle->y;
+	distV.x = point.x - circle->xy[0];
+	distV.y = point.y - circle->xy[1];
 	auto distSqr = distV.x * distV.x + distV.y * distV.y; 
 
 	return distSqr < circle->radius * circle->radius;
