@@ -16,12 +16,9 @@ void Exemplo4::setup(){
 	colors[0] = color1;
 	colors[1] = color2;
 
-	b1.wh[0] = b2.wh[0] = 100;
-	b1.wh[1] = b2.wh[1] = 100;
+	b1.size = b2.size = Vector2D(100, 100);
 	c1.radius = c2.radius = 100;
-
-	b2.xy[0] = c2.xy[0] = 600;
-	b2.xy[1] = c2.xy[1] = 300;
+	b2.position = c2.position = Vector2D(600, 300);
 
 	pressedButton = 1;
 }
@@ -30,30 +27,21 @@ void Exemplo4::setup(){
 void Exemplo4::update(){
 	switch (pressedButton) {
 		case 1:
-			b1.xy[0] = mouse.x;
-			b1.xy[1] = mouse.y;
+			b1.position = mouse;
 
 			//TODO: Fazer o teste com os outros algoritmos de bounding box implementados
 			colors[0] = AABBOffsetCollisionCheck(&b1, &b2) ? color3 : color2;
 			break;
 		case 2:
-			c1.xy[0] = mouse.x;
-			c1.xy[1] = mouse.y;
-
+			c1.position = mouse;
 			colors[0] = circleCollisionCheck(&c1, &c2) ? color3 : color2;
 			break;
 		case 3:
-			c1.xy[0] = mouse.x;
-			c1.xy[1] = mouse.y;
-
+			c1.position = mouse;
 			colors[0] = circleBoxCollisionCheck(&b2, &c1) ? color3 : color2;
 			break;
 		case 4:
-			Point p;
-			p.x = mouse.x;
-			p.y = mouse.y;
-
-			colors[1] = pointBoxCollisionCheck(&p, &b2) ? color3 : color2;
+			colors[1] = pointBoxCollisionCheck(&mouse, &b2) ? color3 : color2;
 			break;
 	}
 }
@@ -65,27 +53,27 @@ void Exemplo4::draw(){
 	switch (pressedButton) {
 	case 1:
 		cg::setColor(colors[1]);
-		cg::drawBox(Vector2D(b2.xy[0], b2.xy[1]), Vector2D(b2.wh[0], b2.wh[1]));
+		cg::drawBox(b2.position, b2.size);
 		cg::setColor(colors[0]);
-		cg::drawBox(Vector2D(b1.xy[0], b1.xy[1]), Vector2D(b1.wh[0], b1.wh[1]));
+		cg::drawBox(b1.position, b1.size);
 		break;
 	case 2:
 		cg::setColor(colors[1]);
-		cg::drawCircle(Vector2D(c2.xy[0], c2.xy[1]), c2.radius);
+		cg::drawCircle(c2.position, c2.radius);
 		cg::setColor(colors[0]);
-		cg::drawCircle(Vector2D(c1.xy[0], c1.xy[1]), c1.radius);
+		cg::drawCircle(c1.position, c1.radius);
 		break;
 	case 3:
 		cg::setColor(colors[1]);
-		cg::drawCircle(Vector2D(c1.xy[0], c1.xy[1]), c1.radius);
+		cg::drawCircle(c1.position, c1.radius);
 		cg::setColor(colors[0]);
-		cg::drawBox(Vector2D(b2.xy[0] + b2.wh[0] / 2, b2.xy[1] + b2.wh[1] / 2), Vector2D(b2.wh[0], b2.wh[1]));
+		cg::drawBox(b2.position + b2.size / 2, b2.size);
 		break;
 	case 4:
 		cg::setColor(colors[1]);
-		cg::drawBox(Vector2D(b2.xy[0] + b2.wh[0] / 2, b2.xy[1] + b2.wh[1] / 2), Vector2D(b2.wh[0], b2.wh[1]));
+		cg::drawBox(b2.position + b2.size / 2, b2.size);
 		cg::setColor(colors[0]);
-		cg::drawCircle(Vector2D(mouse.x, mouse.y), 1);
+		cg::drawCircle(mouse, 1);
 		break;
 	}
 }
@@ -103,7 +91,7 @@ void Exemplo4::keyReleased(int key){
 
 //--------------------------------------------------------------
 void Exemplo4::mouseMoved(int x, int y ){
-	mouse = Vector2D(x, ofGetHeight() - y);
+	mouse.set(x, ofGetHeight() - y);
 }
 
 //--------------------------------------------------------------

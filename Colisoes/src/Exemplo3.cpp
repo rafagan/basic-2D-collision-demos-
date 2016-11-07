@@ -9,13 +9,10 @@ using namespace math;
 void Exemplo3::setup(){
 	step = 0;
 
-	c.xy[0] = 300;
-	c.xy[1] = 150;
-	c.radius = 50;
+	c.position.set(300, 150);
 
 	position.set(600, 200);
-	b.wh[0] = 100;
-	b.wh[1] = 200;
+	b.size.set(100, 200);
 
 	velocity = Vector2D(50, 0);
 }
@@ -25,13 +22,11 @@ void Exemplo3::configureNextStep()
 {
 	if (step == 0) {
 		velocity = Vector2D(100, 0);
-		c.xy[0] = 150;
-		c.xy[1] = 300;
-		c.radius = 50;
+
+		c = BoundingCircle(150, 300, 50);
 
 		position.set(500, 300);
-		b.wh[0] = 100;
-		b.wh[1] = 200;
+		b.size.set(100, 200);
 
 		step = 1;
 	}
@@ -40,15 +35,12 @@ void Exemplo3::configureNextStep()
 			step = 2;
 	}
 	else if (step == 2) {
-		c.xy[0] = 300;
-		c.xy[1] = 200;
-		c.radius = 50;
+		velocity = Vector2D(0, 100);
+
+		c = BoundingCircle(300, 200, 50);
 
 		position.set(300, 400);
-		b.wh[0] = 200;
-		b.wh[1] = 100;
-
-		velocity = Vector2D(0, 100);
+		b.size.set(200, 100);
 
 		step = 3;
 	}
@@ -65,25 +57,22 @@ void Exemplo3::update(){
 	configureNextStep();
 
 	auto dt = ofGetLastFrameTime();
-
-	c.xy[0] += velocity.x * dt;
-	c.xy[1] += velocity.y * dt;
+	c.position += velocity * dt;
 }
 
 //--------------------------------------------------------------
 void Exemplo3::draw(){
 	ofSetBackgroundColor(0, 0, 0);
 
-	b.xy[0] = position.x - b.wh[0] / 2;
-	b.xy[1] = position.y - b.wh[1] / 2;
+	b.position = position - b.size / 2; //Algorithm considerer top left corner
 	cg::setColor(Vector3D(255, 255, 255));
-	cg::drawBox(Vector2D(position.x, position.y), Vector2D(b.wh[0], b.wh[1]));
+	cg::drawBox(position, b.size);
 
 	circleBoxCollisionCheck(&b, &c) ?
 		cg::setColor(Vector3D(255, 255, 0)) :
 		cg::setColor(Vector3D(0, 255, 255));
 
-	cg::drawCircle(Vector2D(c.xy[0], c.xy[1]), c.radius);
+	cg::drawCircle(c.position, c.radius);
 }
 
 //--------------------------------------------------------------
