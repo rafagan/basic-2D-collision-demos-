@@ -1,4 +1,4 @@
-# basic-2D-collision-demos-
+# Basic 2D Collision Demos Plus Plus
 Improvements of https://github.com/rafagan/basic-2D-collision-demos using C++
 
 For more info, please visit: https://github.com/rafagan/basic-2D-collision-demos
