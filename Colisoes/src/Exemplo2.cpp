@@ -7,12 +7,10 @@ using namespace math;
 
 //--------------------------------------------------------------
 void Exemplo2::setup(){
-	c1.xy[0] = 100;
-	c1.xy[1] = 200;
+	c1.position.set(100, 200);
 	c1.radius = 100;
 
-	c2.xy[0] = 600;
-	c2.xy[1] = 300;
+	c2.position.set(600, 300);
 	c2.radius = 50;
 
 	velocity = Vector2D(100, 0);
@@ -25,8 +23,7 @@ void Exemplo2::update(){
 	if (c1.xy[0] > ofGetWidth())
 		std::exit(0);
 
-	c1.xy[0] += velocity.x * dt;
-	c1.xy[1] += velocity.y * dt;
+	c1.position += velocity * dt;
 }
 
 //--------------------------------------------------------------
@@ -34,13 +31,13 @@ void Exemplo2::draw(){
 	ofSetBackgroundColor(0, 0, 0);
 
 	cg::setColor(Vector3D(255, 255, 255));
-	cg::drawCircle(Vector2D(c2.xy[0], c2.xy[1]), c2.radius);
+	cg::drawCircle(c2.position, c2.radius);
 
 	circleCollisionCheck(&c1, &c2) ?
 		cg::setColor(Vector3D(255, 255, 0)) :
 		cg::setColor(Vector3D(0, 255, 255));
 
-	cg::drawCircle(Vector2D(c1.xy[0], c1.xy[1]), c1.radius);
+	cg::drawCircle(c1.position, c1.radius);
 }
 
 //--------------------------------------------------------------
