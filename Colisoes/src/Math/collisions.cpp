@@ -15,16 +15,16 @@
 
 using namespace math;
 
-int math::pointBoxCollisionCheck(const Point *point, const BoundingBox *box) {
-	int left = point->x >= box->xy[0];
-	int right = point->x <= (box->xy[0] + box->wh[0]);
-	int top = point->y >= box->xy[1];
-	int bottom = point->y <= (box->xy[1] + box->wh[1]);
+bool math::pointBoxCollisionCheck(const Point *point, const BoundingBox *box) {
+	auto left = point->x >= box->xy[0];
+	auto right = point->x <= (box->xy[0] + box->wh[0]);
+	auto top = point->y >= box->xy[1];
+	auto bottom = point->y <= (box->xy[1] + box->wh[1]);
 
 	return (left && right && top && bottom);
 }
 
-int math::AABBCollisionCheck(const BoundingBox *box, const BoundingBox *other){
+bool math::AABBCollisionCheck(const BoundingBox *box, const BoundingBox *other){
 	float boxLeft, boxRight, boxTop, boxBottom;
 	boxLeft = box->xy[0];
 	boxRight = box->xy[0] + box->wh[0]; 
@@ -38,18 +38,18 @@ int math::AABBCollisionCheck(const BoundingBox *box, const BoundingBox *other){
 	otherBottom = other->xy[1] + other->wh[1];
 
 	if(boxLeft > otherRight)
-		return 0;
+		return false;
 	if(boxRight < otherLeft)
-		return 0;
+		return false;
 	if(boxTop > otherBottom)
-		return 0;
+		return false;
 	if(boxBottom < otherTop)
-		return 0;
+		return false;
 
-	return 1; 
+	return true; 
 }
 
-int math::AABBInnerCollisionCheck(const BoundingBox *box, const BoundingBox *other){
+bool math::AABBInnerCollisionCheck(const BoundingBox *box, const BoundingBox *other){
 	float boxLeft, boxRight, boxTop, boxBottom;
 	boxLeft = box->xy[0];
 	boxRight = box->xy[0] + box->wh[0];
@@ -64,11 +64,11 @@ int math::AABBInnerCollisionCheck(const BoundingBox *box, const BoundingBox *oth
 
 	if(boxRight > otherLeft && boxLeft < otherRight)
 		if(boxTop < otherBottom && boxBottom > otherTop)
-			return 1;
-	return 0; 
+			return true;
+	return false;
 }
 
-int math::circleCollisionCheck(const BoundingCircle *circle, const BoundingCircle *other) {
+bool math::circleCollisionCheck(const BoundingCircle *circle, const BoundingCircle *other) {
 	Point distV;
 	distV.x = circle->xy[0] - other->xy[0];
 	distV.y = circle->xy[1] - other->xy[1];
@@ -78,7 +78,7 @@ int math::circleCollisionCheck(const BoundingCircle *circle, const BoundingCircl
 	return distSqr < sumRadius;
 }
 
-int math::circleBoxCollisionCheck(const BoundingBox *box, const BoundingCircle *circle) {
+bool math::circleBoxCollisionCheck(const BoundingBox *box, const BoundingCircle *circle) {
 	Point point;
 	float boxLeft, boxRight, boxTop, boxBottom;
 
@@ -109,22 +109,22 @@ int math::circleBoxCollisionCheck(const BoundingBox *box, const BoundingCircle *
 	return distSqr < circle->radius * circle->radius;
 }
 
-int math::AABBOffsetCollisionCheck(const BoundingBox *box, const BoundingBox *other) {
+bool math::AABBOffsetCollisionCheck(const BoundingBox *box, const BoundingBox *other) {
 	Point offset;
 	offset.x = other->xy[0] - box->xy[0];
 	offset.y = other->xy[1] - box->xy[1];
 
 	if(offset.x >= 0) {
 		if(offset.x > box->wh[0])
-			return 0;
+			return false;
 	} else if(-offset.x > other->wh[0])
-		return 0;
+		return false;
 
 	if(offset.y >= 0) {
 		if(offset.y > box->wh[1])
-			return 0;
+			return false;
 	} else if(-offset.y > other->wh[1])
-		return 0;
+		return false;
 
-	return 1;
+	return true;
 }

@@ -58,13 +58,13 @@ namespace math {
 		float radius;
 	};
 
-	int pointBoxCollisionCheck(const Point *point, const BoundingBox *box);
+	bool pointBoxCollisionCheck(const Point *point, const BoundingBox *box);
 
-	//Três maneiras diferentes de fazer a mesma coisa
-	int AABBCollisionCheck(const BoundingBox *box, const BoundingBox *other);
-	int AABBInnerCollisionCheck(const BoundingBox *box, const BoundingBox *other);
-	int AABBOffsetCollisionCheck(const BoundingBox *box, const BoundingBox *other);
+	//Three different ways to do the same thing (study case)
+	bool AABBCollisionCheck(const BoundingBox *box, const BoundingBox *other);
+	bool AABBInnerCollisionCheck(const BoundingBox *box, const BoundingBox *other);
+	bool AABBOffsetCollisionCheck(const BoundingBox *box, const BoundingBox *other);
 
-	int circleCollisionCheck(const BoundingCircle *c1, const BoundingCircle *c2);
-	int circleBoxCollisionCheck(const BoundingBox *b, const BoundingCircle *c);
+	bool circleCollisionCheck(const BoundingCircle *c1, const BoundingCircle *c2);
+	bool circleBoxCollisionCheck(const BoundingBox *b, const BoundingCircle *c);
 }
