@@ -25,8 +25,8 @@ class Exemplo4 : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo) override;
 		void gotMessage(ofMessage msg) override;
 	private:
-		BoundingCircle c1, c2;
-		BoundingBox b1, b2;
+		math::BoundingCircle c1, c2;
+		math::BoundingBox b1, b2;
 		math::Vector2D mouse;
 		math::Vector3D color1, color2, color3;
 		std::array<math::Vector3D, 2> colors;

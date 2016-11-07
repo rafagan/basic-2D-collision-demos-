@@ -22,8 +22,8 @@ class Exemplo3 : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo) override;
 		void gotMessage(ofMessage msg) override;
 	private:
-		BoundingCircle c;
-		BoundingBox b;
+		math::BoundingCircle c;
+		math::BoundingBox b;
 		math::Vector2D position;
 		math::Vector2D velocity;
 		int step;

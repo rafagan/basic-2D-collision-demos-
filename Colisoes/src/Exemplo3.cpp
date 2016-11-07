@@ -14,8 +14,8 @@ void Exemplo3::setup(){
 	c.radius = 50;
 
 	position.set(600, 200);
-	b.width = 100;
-	b.height = 200;
+	b.wh[0] = 100;
+	b.wh[1] = 200;
 
 	velocity = Vector2D(50, 0);
 }
@@ -30,8 +30,8 @@ void Exemplo3::configureNextStep()
 		c.radius = 50;
 
 		position.set(500, 300);
-		b.width = 100;
-		b.height = 200;
+		b.wh[0] = 100;
+		b.wh[1] = 200;
 
 		step = 1;
 	}
@@ -45,8 +45,8 @@ void Exemplo3::configureNextStep()
 		c.radius = 50;
 
 		position.set(300, 400);
-		b.width = 200;
-		b.height = 100;
+		b.wh[0] = 200;
+		b.wh[1] = 100;
 
 		velocity = Vector2D(0, 100);
 
@@ -74,10 +74,10 @@ void Exemplo3::update(){
 void Exemplo3::draw(){
 	ofSetBackgroundColor(0, 0, 0);
 
-	b.x = position.x - b.width / 2;
-	b.y = position.y - b.height / 2;
+	b.xy[0] = position.x - b.wh[0] / 2;
+	b.xy[1] = position.y - b.wh[1] / 2;
 	cg::setColor(Vector3D(255, 255, 255));
-	cg::drawBox(Vector2D(position.x, position.y), Vector2D(b.width, b.height));
+	cg::drawBox(Vector2D(position.x, position.y), Vector2D(b.wh[0], b.wh[1]));
 
 	circleBoxCollisionCheck(&b, &c) ?
 		cg::setColor(Vector3D(255, 255, 0)) :

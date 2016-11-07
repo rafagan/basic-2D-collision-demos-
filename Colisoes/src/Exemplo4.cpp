@@ -16,12 +16,12 @@ void Exemplo4::setup(){
 	colors[0] = color1;
 	colors[1] = color2;
 
-	b1.width = b2.width = 100;
-	b1.height = b2.height = 100;
+	b1.wh[0] = b2.wh[0] = 100;
+	b1.wh[1] = b2.wh[1] = 100;
 	c1.radius = c2.radius = 100;
 
-	b2.x = c2.x = 600;
-	b2.y = c2.y = 300;
+	b2.xy[0] = c2.x = 600;
+	b2.xy[1] = c2.y = 300;
 
 	pressedButton = 1;
 }
@@ -30,8 +30,8 @@ void Exemplo4::setup(){
 void Exemplo4::update(){
 	switch (pressedButton) {
 		case 1:
-			b1.x = mouse.x;
-			b1.y = mouse.y;
+			b1.xy[0] = mouse.x;
+			b1.xy[1] = mouse.y;
 
 			//TODO: Fazer o teste com os outros algoritmos de bounding box implementados
 			colors[0] = AABBOffsetCollisionCheck(&b1, &b2) ? color3 : color2;
@@ -65,9 +65,9 @@ void Exemplo4::draw(){
 	switch (pressedButton) {
 	case 1:
 		cg::setColor(colors[1]);
-		cg::drawBox(Vector2D(b2.x, b2.y), Vector2D(b2.width, b2.height));
+		cg::drawBox(Vector2D(b2.xy[0], b2.xy[1]), Vector2D(b2.wh[0], b2.wh[1]));
 		cg::setColor(colors[0]);
-		cg::drawBox(Vector2D(b1.x, b1.y), Vector2D(b1.width, b1.height));
+		cg::drawBox(Vector2D(b1.xy[0], b1.xy[1]), Vector2D(b1.wh[0], b1.wh[1]));
 		break;
 	case 2:
 		cg::setColor(colors[1]);
@@ -79,11 +79,11 @@ void Exemplo4::draw(){
 		cg::setColor(colors[1]);
 		cg::drawCircle(Vector2D(c1.x, c1.y), c1.radius);
 		cg::setColor(colors[0]);
-		cg::drawBox(Vector2D(b2.x + b2.width / 2, b2.y + b2.height / 2), Vector2D(b2.width, b2.height));
+		cg::drawBox(Vector2D(b2.xy[0] + b2.wh[0] / 2, b2.xy[1] + b2.wh[1] / 2), Vector2D(b2.wh[0], b2.wh[1]));
 		break;
 	case 4:
 		cg::setColor(colors[1]);
-		cg::drawBox(Vector2D(b2.x + b2.width / 2, b2.y + b2.height / 2), Vector2D(b2.width, b2.height));
+		cg::drawBox(Vector2D(b2.xy[0] + b2.wh[0] / 2, b2.xy[1] + b2.wh[1] / 2), Vector2D(b2.wh[0], b2.wh[1]));
 		cg::setColor(colors[0]);
 		cg::drawCircle(Vector2D(mouse.x, mouse.y), 1);
 		break;

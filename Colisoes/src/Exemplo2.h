@@ -23,6 +23,6 @@ class Exemplo2 : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo) override;
 		void gotMessage(ofMessage msg) override;
 	private:
-		BoundingCircle c1, c2;
+		math::BoundingCircle c1, c2;
 		math::Vector2D velocity;
 };
