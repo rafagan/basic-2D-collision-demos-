@@ -29,7 +29,7 @@ void Exemplo4::update(){
 		case 1:
 			b1.position = mouse;
 			colors[0] = //Testing all algorithms
-				AABBOffsetCollisionCheck(&b1, &b2) && AABBCollisionCheck(&b1, &b2) && AABBCollisionCheck(&b1, &b2)
+				AABBOffsetCollisionCheck(&b1, &b2) && AABBInnerCollisionCheck(&b1, &b2) && AABBCollisionCheck(&b1, &b2)
 				? color3 : color2;
 			break;
 		case 2:

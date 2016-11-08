@@ -18,8 +18,8 @@ using namespace math;
 bool math::pointBoxCollisionCheck(const Point *point, const BoundingBox *box) {
 	auto left = point->x >= box->xy[0];
 	auto right = point->x <= (box->xy[0] + box->wh[0]);
-	auto top = point->y >= box->xy[1];
-	auto bottom = point->y <= (box->xy[1] + box->wh[1]);
+	auto bottom = point->y >= box->xy[1];
+	auto top = point->y <= (box->xy[1] + box->wh[1]);
 
 	return (left && right && top && bottom);
 }
@@ -29,9 +29,9 @@ bool math::AABBCollisionCheck(const BoundingBox *box, const BoundingBox *other){
 		return false;
 	if(box->right() < other->left())
 		return false;
-	if(box->top() > other->bottom())
+	if(box->bottom() > other->top())
 		return false;
-	if(box->bottom() < other->top())
+	if (box->top() < other->bottom())
 		return false;
 
 	return true; 
@@ -39,7 +39,7 @@ bool math::AABBCollisionCheck(const BoundingBox *box, const BoundingBox *other){
 
 bool math::AABBInnerCollisionCheck(const BoundingBox *box, const BoundingBox *other){
 	if(box->right() > other->left() && box->left() < other->right())
-		if(box->top() < other->bottom() && box->bottom() > other->top())
+		if(box->top() > other->bottom() && box->bottom() < other->top())
 			return true;
 	return false;
 }
@@ -58,9 +58,9 @@ bool math::circleBoxCollisionCheck(const BoundingBox *box, const BoundingCircle 
 	else
 		result.x = circle->xy[0];
 
-	if(circle->xy[1] < box->top())
+	if(circle->xy[1] > box->top())
 		result.y = box->top();
-	else if(circle->xy[1] > box->bottom())
+	else if(circle->xy[1] < box->bottom())
 		result.y = box->bottom();
 	else
 		result.y = circle->xy[1];

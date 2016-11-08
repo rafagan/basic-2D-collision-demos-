@@ -38,8 +38,8 @@ namespace math {
 
 		float left() const { return xy[0]; };
 		float right() const { return xy[0] + wh[0]; };
-		float top() const { return xy[1]; };
-		float bottom() const { return xy[1] + wh[1]; };
+		float bottom() const { return xy[1]; };
+		float top() const { return xy[1] + wh[1]; };
 	};
 
 	typedef Vector2D Point;
