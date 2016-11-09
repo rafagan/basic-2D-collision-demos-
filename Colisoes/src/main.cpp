@@ -3,6 +3,7 @@
 #include "Exemplo2.h"
 #include "Exemplo3.h"
 #include "Exemplo4.h"
+#include "Exercicios/exColisao1.h"
 
 //========================================================================
 int main( ){
@@ -11,5 +12,5 @@ int main( ){
 	// this kicks off the running of my app
 	// can be OF_WINDOW or OF_FULLSCREEN
 	// pass in width and height too:
-	ofRunApp(new Exemplo4());
+	ofRunApp(new ExColisao1_2());
 }
