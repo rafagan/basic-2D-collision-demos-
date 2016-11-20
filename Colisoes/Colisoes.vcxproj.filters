@@ -17,6 +17,7 @@
     <ClCompile Include="src\Exemplo2.cpp" />
     <ClCompile Include="src\Exemplo3.cpp" />
     <ClCompile Include="src\Exemplo4.cpp" />
+    <ClCompile Include="src\Exercicios\exColisao1_2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -41,6 +42,7 @@
     <ClInclude Include="src\Exemplo2.h" />
     <ClInclude Include="src\Exemplo3.h" />
     <ClInclude Include="src\Exemplo4.h" />
+    <ClInclude Include="src\Exercicios\exColisao1_2.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

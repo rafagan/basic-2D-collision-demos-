@@ -1,6 +1,5 @@
 #include "ExColisao1_2.h"
 
-#include <iostream>
 #include "../Math/MathUtil.h"
 #include "../Math/Vector2D.h"
 #include "../DrawUtils.h"
